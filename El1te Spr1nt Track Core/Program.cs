@@ -1,8 +1,15 @@
+using El1te_Spr1nt_Track_Core.Data;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("El1teDbCOnnectionString");
+builder.Services.AddDbContext<El1teDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -31,12 +38,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseSerilogRequestLogging();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 // Use CORS with the specified policy
-app.UseCors("AllowSpecificOrigins");
+app.UseCors("AllowAll");
 
 app.MapControllers();
 
