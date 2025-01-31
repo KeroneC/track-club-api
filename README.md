@@ -4,7 +4,7 @@ Welcome to the Elite Sprint Athletics Web API! This API is designed to serve as 
 
 ## Technologies Used
 
-- .NET 7
+- .NET 8
 - C#
 - Entity Framework Core
 - SQL Server
