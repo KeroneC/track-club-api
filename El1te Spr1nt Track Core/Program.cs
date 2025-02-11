@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("El1teDbCOnnectionString");
+
 builder.Services.AddDbContext<El1teDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
