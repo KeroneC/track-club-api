@@ -19,7 +19,7 @@ namespace El1te_Spr1nt_Track_Core.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure Many-to-Many Relationships
+            // Configure many-to-many relationships
             modelBuilder.Entity<AthleteEvent>()
                 .HasKey(ae => new { ae.AthleteId, ae.EventId });
 
@@ -30,33 +30,50 @@ namespace El1te_Spr1nt_Track_Core.Data
                 .HasOne(a => a.ParentUser)
                 .WithMany(u => u.Athletes)
                 .HasForeignKey(a => a.ParentUserId)
-                .OnDelete(DeleteBehavior.Restrict); // Prevent accidental cascading delete
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //Seed Parent Users
+            // Add Precision to Decimal Fields
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<OrderItem>()
+                .Property(p => p.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.TotalAmount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Donation>()
+                .Property(d => d.Amount)
+                .HasPrecision(18, 2);
+
+            // 🔹 Seed Parent Users
             modelBuilder.Entity<User>().HasData(
                 new User(-1, "John", "Doe", "john.doe@example.com", "hashedpassword123", "Parent"),
                 new User(-2, "Jane", "Smith", "jane.smith@example.com", "hashedpassword456", "Parent")
             );
 
-            //Seed Athletes (Linked to Parents)
+            // 🔹 Seed Athletes (linked to parent users)
             modelBuilder.Entity<Athlete>().HasData(
-                new Athlete(-1, "Michael Doe", new DateTime(2012, 6, 15), "Male", 1),
-                new Athlete(-2, "Emily Smith", new DateTime(2010, 8, 22), "Female", 2)
+                new Athlete(-1, "Michael Doe", new DateTime(2012, 6, 15), "Male", -1),
+                new Athlete(-2, "Emily Smith", new DateTime(2010, 8, 22), "Female", -2)
             );
 
-            //Seed Events
+            // 🔹 Seed Events
             modelBuilder.Entity<Event>().HasData(
                 new Event(-1, "100m Sprint", new DateTime(2024, 7, 10), "National Stadium"),
                 new Event(-2, "200m Sprint", new DateTime(2024, 8, 15), "City Sports Complex")
             );
 
-            //Seed Products for Storefront 
+            // 🔹 Seed Products for Storefront
             modelBuilder.Entity<Product>().HasData(
                 new Product(-1, "Track Club T-Shirt", "High-quality club t-shirt", 25.99m, 50, "tshirt.jpg", "Merchandise"),
                 new Product(-2, "Water Bottle", "Durable sports water bottle", 15.99m, 30, "waterbottle.jpg", "Accessories")
             );
 
-            //Seed Testimonials (Must be approved before appearing)
+            // 🔹 Seed Testimonials
             modelBuilder.Entity<Testimonial>().HasData(
                 new Testimonial(-1, "Parent", "John Doe", "This club has been amazing for my son!", false, null),
                 new Testimonial(-2, "Athlete", "Emily Smith", "I've improved so much since joining!", false, null)
