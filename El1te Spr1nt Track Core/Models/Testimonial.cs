@@ -20,6 +20,7 @@
             Content = content;
             PhotoUrl = photoUrl;
             IsApproved = isApproved;
+            PhotoUrl = photoUrl;
         }
     }
 }

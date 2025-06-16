@@ -12,7 +12,7 @@
 
         public Product(int id, string name, string description, decimal price, int stockQuantity, string imageUrl, string category)
         {
-            Id = Id;
+            Id = id;
             Name = name;
             Description = description;
             Price = price;

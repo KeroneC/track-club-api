@@ -26,13 +26,14 @@ namespace El1te_Spr1nt_Track_Core.Models
         public Athlete() { }
 
         // Constructor for Seeding Data
-        public Athlete(int id, string name, DateTime dateOfBirth, string gender, int parentUserId)
+        public Athlete(int id, string name, DateTime dob, string gender, int parentUserId)
         {
             Id = id;
             Name = name;
-            DateOfBirth = dateOfBirth;
+            DateOfBirth = dob;
             Gender = gender;
             ParentUserId = parentUserId;
+            IsActivated = false;
         }
 
         // Method to Activate Athlete Account
