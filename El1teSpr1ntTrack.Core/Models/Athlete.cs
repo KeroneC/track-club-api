@@ -1,4 +1,4 @@
-﻿namespace El1te_Spr1nt_Track_Core.Models
+﻿namespace El1teSpr1ntTrack.Core.Models
 {
     public class Athlete
     {

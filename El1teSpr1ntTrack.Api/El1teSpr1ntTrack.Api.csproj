@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>f56f662a-291b-4b89-8c7c-20aca9dd657c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.3.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\El1teSpr1ntTrack.Application\El1teSpr1ntTrack.Application.csproj" />
+    <ProjectReference Include="..\El1teSpr1ntTrack.Core\El1teSpr1ntTrack.Core.csproj" />
+    <ProjectReference Include="..\El1teSpr1ntTrack.Infrastructure\El1teSpr1ntTrack.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
