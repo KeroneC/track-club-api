@@ -8,24 +8,26 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using El1teSpr1ntTrack.Core.Interfaces.Repositories;
 
 namespace El1teSpr1ntTrack.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly El1teDbContext _context;
+        private readonly IUserRepository _userRepository;
         private readonly IConfiguration _config;
 
-        public AuthService(El1teDbContext context, IConfiguration config)
+        public AuthService(IUserRepository userRepository, IConfiguration config)
         {
-            _context = context;
+            _userRepository = userRepository;
             _config = config;
         }
 
         public async Task<AuthResponseDto> RegisterUserAsync(UserRegisterDto dto)
         {
             // Check if user already exists
-            if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+            var existingUser = await _userRepository.GetByEmailAsync(dto.Email);
+            if (existingUser != null)
                 throw new Exception("User already exists with this email.");
 
             // Hash password
@@ -41,15 +43,15 @@ namespace El1teSpr1ntTrack.Application.Services
                 Role = "Parent" // default role
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            await _userRepository.AddAsync(user);
+            await _userRepository.SaveChangesAsync();
 
             return GenerateToken(user);
         }
 
         public async Task<AuthResponseDto> LoginUserAsync(UserLoginDto dto)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == dto.Email);
+            var user = await _userRepository.GetByEmailAsync(dto.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
                 throw new Exception("Invalid email or password.");
 

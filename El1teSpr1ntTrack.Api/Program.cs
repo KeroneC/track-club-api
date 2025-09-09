@@ -6,6 +6,8 @@ using Serilog;
 using El1teSpr1ntTrack.Infrastructure.Data;
 using El1teSpr1ntTrack.Application.Services;
 using El1teSpr1ntTrack.Application.Interfaces;
+using El1teSpr1ntTrack.Core.Interfaces.Repositories;
+using El1teSpr1ntTrack.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +43,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
-
+builder.Services.AddScoped<IAthleteRepository, AthleteRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
