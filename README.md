@@ -1,13 +1,26 @@
 # El1te Spr1nt Athlet1cs Web API
 
-Welcome to the Elite Sprint Athletics Web API! This API is designed to serve as the backend for the Elite Sprint Athletics track club, providing access to information about athletes, events, records, and more.
+This is the backend system for El1te Spr1nt Athlet1cs — a nonprofit track club. Built with modern clean architecture principles using .NET 8 and Angular, this project is designed to be secure, scalable, and maintainable.
 
-## Technologies Used
+---
 
-- .NET 8
-- C#
+## 🔧 Technologies
+
+- ASP.NET Core 8 Web API
 - Entity Framework Core
 - SQL Server
+- JWT Authentication
+- Serilog Logging
+- CORS Support
+- Swagger/OpenAPI
+- Clean Architecture
+
+## 🗂 Project Structure
+
+- El1teSpr1ntTrack.Api/         → Web API (controllers, middleware, DI, auth)
+- El1teSpr1ntTrack.Core/        → Domain models, DTOs, interfaces
+- El1teSpr1ntTrack.Infrastructure/ → EF DbContext, migrations, repository implementations
+- El1teSpr1ntTrack.Application/ → Business logic & services
 
 ## Getting Started
 
@@ -15,9 +28,10 @@ To get started with the Elite Sprint Athletics Web API, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Open the solution in Visual Studio or your preferred IDE.
-3. Update the `appsettings.json` file with your SQL Server connection string.
-4. Run the database migrations to create the database schema: `dotnet ef database update`.
-5. Run the API project.
+3. Set El1teSpr1ntTrack.Api as the startup project
+4. Update the `appsettings.json` file with your SQL Server connection string and valid JWT key.
+5. Run EF Core migrations: Update-Database
+6. Run the API project to launch SwaggerUI.
 
 ## API Endpoints
 
@@ -26,7 +40,7 @@ The Elite Sprint Athletics Web API provides the following endpoints:
 # Track Club API Endpoints
 
 ## 👤 User & Authentication Endpoints
-- `POST /api/users/register-parent` - Register a parent user (who can add athletes).
+- `POST /api/users/register` - Register a parent user (who can add athletes).
 - `POST /api/users/login` - Authenticate user & return JWT token.
 - `GET /api/users/{id}` - Get user details (including linked athletes if a parent).
 - `PUT /api/users/{id}` - Update user details.

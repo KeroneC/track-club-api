@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\El1teSpr1ntTrack.Core\El1teSpr1ntTrack.Core.csproj" />
+    <ProjectReference Include="..\El1teSpr1ntTrack.Infrastructure\El1teSpr1ntTrack.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
