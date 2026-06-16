@@ -1,14 +1,13 @@
-﻿using System;
+﻿using El1teSpr1ntTrack.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace El1teSpr1ntTrack.Core.Interfaces.Repositories
+namespace El1teSpr1ntTrack.Application.Interfaces
 {
-    using Models;
-
-    public interface IAthleteRepository
+    public interface IAthleteService
     {
         Task<IEnumerable<Athlete>> GetAllAsync();
         Task<Athlete?> GetByIdAsync(int id);
